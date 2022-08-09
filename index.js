@@ -5,10 +5,18 @@ import { v4 as uuid } from 'uuid';
 // add the micro credentials corresponding to data to the decomposed array
 // return the root micro credential
 export function decompose(data, decomposed) {
+    /*
+    // some debugging logs
+    console.log("decomposing")
+    console.log(data)
+    console.log("decomposed so far:")
+    console.log(decomposed)
+    */
+
     if (Object(data) !== data) {
         throw "Data is not an object"
     }
-    if (Array.isArray(data)) {
+    if (!Array.isArray(decomposed)) {
         throw "decomposed is not an Array"
     }
 
@@ -16,21 +24,7 @@ export function decompose(data, decomposed) {
     decomposed.push(parent)
 
     for (var key in data) {
-        if (Array.isArray(data[key])) {
-            for (var childObject in data[key]) {
-                if (Object(childObject) === childObject) {
-                    var child = decompose(childObject, decomposed)
-                    child.parent = parent
-                } else {
-                    var child = {
-                        id: uuid(),
-                        parent: parent.id,
-                        value: childObject
-                    }
-                    decomposed.push(child)
-                }
-            }
-        } else if (Object(data[key]) === data[key]) {
+        if (Object(data[key]) === data[key]) { // Object or array
             child = decompose(data[key], decomposed)
             child.parent = parent.id
             child.key = key

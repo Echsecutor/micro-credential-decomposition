@@ -40,15 +40,15 @@ function test_decomposition() {
 
     assert(lvl_1_children.filter((micro) => micro.key === "weight").length === 1)
     const weight_mc = lvl_1_children.filter((micro) => micro.key === "weight")[0]
-    const weight_children = decomposed.filter((micro) => micro.parent === weight_children.id)
+    const weight_children = decomposed.filter((micro) => micro.parent === weight_mc.id)
     assert(weight_children.filter((micro) => micro.key === "value").length === 1)
     assert(weight_children.filter((micro) => micro.key === "value")[0].value === 12)
     assert(weight_children.filter((micro) => micro.key === "uom").length === 1)
     assert(weight_children.filter((micro) => micro.key === "uom")[0].value === "g")
 
-
     assert(lvl_1_children.filter((micro) => micro.key === "size").length === 1)
     assert(lvl_1_children.filter((micro) => micro.key === "size")[0].value === "large")
+    console.log("[OK] test_decomposition passed")
 }
 
 
