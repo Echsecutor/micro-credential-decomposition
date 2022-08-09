@@ -1,8 +1,8 @@
-import { decompose } from "./index.js"
+import { decompose, compose } from "./index.js"
 
-function assert(boolean) {
+function assert(boolean, msg="") {
     if (!boolean) {
-        throw "Assertion failed"
+        throw "Assertion failed. " + msg
     }
 }
 
@@ -51,5 +51,23 @@ function test_decomposition() {
     console.log("[OK] test_decomposition passed")
 }
 
+function test_inversion() {
+    var decomposed = []
+    const root = decompose(example_data, decomposed)
+    const restored = compose(root, decomposed)
 
-test_decomposition()
+    console.log("example_data")
+    console.log(example_data)
+    console.log("restored")
+    console.log(restored)
+
+    assert(JSON.stringify(restored) === JSON.stringify(example_data), "Re-composed data does not match initial data.")
+    console.log("[OK] test_inversion passed")
+}
+
+function main() {
+    test_decomposition()
+    test_inversion()
+}
+
+main()
