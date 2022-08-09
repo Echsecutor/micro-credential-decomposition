@@ -1,0 +1,16 @@
+{
+    "name": "micro-credential-decomposition",
+    "version": "1.0.0",
+    "description": "Simple algorithm to decompose/compose a complex data model into/from micro data models",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "node --trace-uncaught test.js"
+    },
+    "author": "Sebastian Schmittner",
+    "license": "MIT",
+    "dependencies": {
+        "uuid": "^8.3.2"
+    },
+    "type": "module"
+}
